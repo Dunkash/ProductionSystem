@@ -1,0 +1,19 @@
+Dog
+Cat
+
+Ball
+
+Human
+
+
+***
+
+Dog -> Bark
+
+#Dog barks at cat
+Dog, Cat -> Bark
+
+Dog, Human, Ball -> Playing ball
+
+#Human serves cat
+Human, Cat -> Servitude

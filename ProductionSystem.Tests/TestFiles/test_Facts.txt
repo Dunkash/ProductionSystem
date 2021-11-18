@@ -1,0 +1,17 @@
+Dog
+Cat
+
+Ball
+
+Human
+
+
+***
+
+#This line does absolutely nothing
+
+
+
+
+
+#I just wanted to test, how it will interact with sensless comments

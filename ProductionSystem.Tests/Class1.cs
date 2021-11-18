@@ -1,9 +1,7 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace ProductionSystem.Library.Test
 {
@@ -38,7 +36,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ParserTestBase()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Basic.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Basic.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -61,7 +59,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ParserTestEmpty()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Empty.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Empty.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -74,7 +72,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ParserTestFacts()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Facts.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Facts.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -90,7 +88,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ParserTestRules()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Rules.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Rules.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -112,7 +110,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ParserTestLorem()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Lorem.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Lorem.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -128,7 +126,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ForwardBasic()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Basic.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Basic.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -144,7 +142,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ForwardEmpty()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Empty.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Empty.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -158,7 +156,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ForwardNoRules()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Facts.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Facts.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -172,7 +170,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ForwardNoFacts()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Rules.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Rules.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -186,7 +184,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ForwardLorem()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Lorem.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Lorem.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -200,7 +198,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ForwardComplex()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Complex.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Complex.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -226,7 +224,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void BackwardNoResults()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Basic.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Basic.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -242,7 +240,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void BackwardBasic()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_BackwardBasic.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BackwardBasic.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -258,7 +256,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void BackwardEmpty()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Empty.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Empty.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -272,7 +270,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void BackwardNoRules()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Facts.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Facts.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -286,7 +284,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void BackwardNoFacts()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Rules.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Rules.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -300,7 +298,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void BackwardLorem()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Lorem.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Lorem.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -313,7 +311,7 @@ namespace ProductionSystem.Library.Test
 
         public void BackwardComplex()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_BacwardComplex.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BacwardComplex.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -335,7 +333,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ForwardEvaluateBasic()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Basic.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Basic.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -352,7 +350,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ForwardEvaluateNoFacts()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Rules.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Rules.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -366,7 +364,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void ForwardEvaluateComplex()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Complex.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Complex.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -382,7 +380,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void BackwardEvaluateNoFacts()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_Rules.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Rules.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -396,7 +394,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void BackwardEvaluateBasic()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_BackwardBasic.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BackwardBasic.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
@@ -412,7 +410,7 @@ namespace ProductionSystem.Library.Test
         [Test]
         public void BackwardEvaluateComplex()
         {
-            var file = AppDomain.CurrentDomain.BaseDirectory + "test_BackwardComplex.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BackwardComplex.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
