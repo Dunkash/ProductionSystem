@@ -13,6 +13,12 @@ namespace ProductionSystem
 {
     static public class Functions
     {
+        //Парсер файла с фактами и правилами.
+        //Все строки обрабатываются как факты, после сепаратора все строки обрабатываются как правила.
+        //Примеры записи указаны в тестовых файлах
+        //Строки сохраняемые как факты обрабатываются полностью и в любом формате, строки, обрабатываемые как правила сохраняются только если они соответствуют формату, иначе они отбрасываются.
+        //В фактах нельзя использовать строки, эквивалентные сепаратору
+        //В правилах нельзя использовать факты, содержащие ',' (они будут разделены по ',' ), и правила содержащие '->' ( будут отсечены, как не подходящие формату).
         static public Tuple<HashSet<string>,HashSet<Rule>> Parse(string fname, string separator = "***")
         {
             var facts = new HashSet<string>();
@@ -53,6 +59,9 @@ namespace ProductionSystem
             return new Tuple<HashSet<string>, HashSet<Rule>>(facts, rules);
         }
 
+
+        //Один цикл прямой обработки по набору правил и фактов.
+        //Возвращает новый набор правил (включая уже имевшиеся)
         public static HashSet<string> Forward(HashSet<string> facts, HashSet<Rule> rules)
         {
             var res = facts.ToHashSet();
@@ -67,6 +76,8 @@ namespace ProductionSystem
             return res;
         }
 
+        //Один цикл обратной обработки по набору правил и фактов.
+        //Возвращает новый набор правил (включая уже имевшиеся)
         public static HashSet<string> Backward(HashSet<string> facts, HashSet<Rule> rules)
         {
             var res = facts.ToHashSet();
@@ -82,6 +93,9 @@ namespace ProductionSystem
             return res;
         }
 
+        //Полная обработка набора правил и фактов
+        //Флаг forward определяет вид обработки (true - прямая, false - обратная)
+        //Возвращает новый набор правил (включая уже имевшиеся)
         public static HashSet<string> Evaluate(HashSet<string> facts, HashSet<Rule> rules, bool forward)
         {
             var res = facts.ToHashSet();

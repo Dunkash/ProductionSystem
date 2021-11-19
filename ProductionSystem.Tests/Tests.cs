@@ -17,8 +17,8 @@ namespace ProductionSystem.Library.Test
             var explanation = "Dog barks at cat";
 
 
-            var rule1 = new ProductionSystem.Rule(requirements, result, explanation);
-            var rule2 = new ProductionSystem.Rule(requirements, result);
+            var rule1 = new Rule(requirements, result, explanation);
+            var rule2 = new Rule(requirements, result);
 
             Assert.AreEqual(rule1.Conditions, requirements);
             Assert.AreEqual(rule1.Action, result);

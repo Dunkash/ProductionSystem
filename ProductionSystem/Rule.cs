@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace ProductionSystem
 {
+    //Класс правила
+    //Каждое правило определяется:
+    //Набором условий Conditions
+    //Результатом правила Action
+    //Опциональным комментарием Explanation
+    //Флаг Evaluated показывает, было ли обработано это правило, и нужен для оптимизации
+    //ВАЖНО: Поскольку комментарий опционален, он не учитывается в сравнении. 
     public class Rule
     {
         HashSet<string> _conditions;
@@ -43,13 +50,13 @@ namespace ProductionSystem
         }
 
 
+        //Конвенртирует в строку, аналогичную записи этого правила в файле
         public override string ToString()
         {
             string res = "";
             if (Explanation != "")
                 res += "# " + Explanation + "\n";
 
-            res += "If ";
             foreach (var i in Conditions)
             {
                 res += i;
@@ -79,7 +86,6 @@ namespace ProductionSystem
         public override int GetHashCode()
         {
             var res = 1;
-            // TODO: write your implementation of GetHashCode() here
             foreach (var i in Conditions)
                 res*=i.GetHashCode();
             return res * Action.GetHashCode();
