@@ -1,0 +1,159 @@
+Wood
+Stone
+Iron Ore
+Golden Ore
+Diamond
+Ancient Wreckage
+Stick
+Sand
+Coal
+Redstone
+Fire
+Water
+Flower
+Obsidian
+Honeycomb
+Flint
+Feather
+Snowball
+Gunpowder
+Clay
+Pumpkin
+Slime
+Vines
+Bone Meal
+Carrot
+Wheat
+Beans
+Cane
+Egg
+Milk
+Apple
+Laminaria
+Thread
+Bamboo
+Fire Rod
+Enderman Pearl
+Dye
+Ink
+Glowstone Dust
+Turtle Shell
+Backpack
+
+***
+
+Backpack, Wood -> Board
+Backpack, Board -> Workbench
+Backpack, Stick, Coal -> Torch
+Backpack, Stick, Redstone -> Redstone Torch
+Backpack, Flint, Iron -> Lighter
+Backpack, Snowball -> Snow Block
+Backpack, Clay -> Clay Block
+Backpack, Pumpkin, Torch -> Jack's Lamp
+Backpack, Stone -> Stone Bricks
+Backpack, Stone, Vines -> Mossy Stone
+Backpack, Carrot, Fishing Rod -> Rod with Carrot
+Backpack, Cane -> Sugar
+Backpack, Sheaf of Hay -> Wheat
+Backpack, Fire Rod -> Firepowder
+Backpack, Enderman Pearl, Firepowder -> Enderman Eye
+Backpack, Slime, Firepowder -> Lava Cream
+Backpack, Gunpowder, Dye -> Star
+Backpack, Bamboo -> Stick
+Backpack, Lava Cream -> Magma Block
+Backpack, Glowstone -> Glowstone Dust
+Workbench, Stone -> Furnace
+Workbench, Wood -> Chest
+Workbench, Iron -> Boiler
+Workbench, Iron, Stone, Furnace -> Melting Furnace
+Workbench, Furnace, Wood -> Smokehouse
+Workbench, Iron, Stone -> Stonecutter
+Workbench, Iron, Iron Block -> Anvil
+Workbench, Wood, Honeycomb -> Hive
+Workbench, Iron, Wood -> Blacksmith's Table
+Workbench, Paper, Board -> Cartographer's Table
+Workbench, Flint, Board -> Archer's Table
+Workbench, Iron, Chest -> Hopper
+Workbench, Stick, Coal -> Torch
+Workbench, Thread, Slime -> Leash
+Workbench, Turtle Shell -> Helmet
+Workbench, Stick, Coal, Wood -> Campfire
+Workbench, Iron -> Iron Block
+Workbench, Gold -> Golden Block
+Workbench, Diamond -> Diamond Block
+Workbench, Snowball -> Snow Block
+Workbench, Clay -> Clay Block
+Workbench, Bone Meal -> Bone Block
+Workbench, Iron Block -> Iron
+Workbench, Golden Block -> Gold
+Workbench, Diamond Block-> Diamond
+Workbench, Pumpkin -> Pumpkin Part
+Workbench, Pumpkin Part -> Pumpkin Seed
+Workbench, Snow Block -> Snow Layer
+Workbench, Thread -> Cloth
+Workbench, Cloth, Board -> Bed
+Workbench, Cloth, Stick -> Picture
+Workbench, Flint, Iron -> Lighter
+Workbench, Gold, Redstone -> Watch
+Workbench, Iron, Redstone -> Compass
+Workbench, Paper, Compass -> Map
+Workbench, Stick, Thread -> Fishing Rod
+Workbench, Wood, Stick -> Wooden Pickaxe
+Workbench, Stone, Stick -> Stone Pickaxe
+Workbench, Iron, Stick -> Iron Pickaxe
+Workbench, Gold, Stick -> Golden Pickaxe
+Workbench, Diamond, Stick -> Diamond Pickaxe
+Workbench, Netherite Scrap, Gold -> Netherite
+Workbench, Flint, Stick, Feather -> Arrow
+Workbench, Glowstone Dust, Arrow -> Ghost Arrow
+Workbench, Gunpowder, Sand -> TNT
+Workbench, Pumpkin, Torch -> Jack's Lamp
+Workbench, Slime -> Slime Block
+Workbench, Stone, Vines -> Mossy Stone
+Workbench, Stick, Redstone -> Redstone Torch
+Workbench, Redstone, Redstone Torch, Stone -> Repeater
+Workbench, Beans, Wheat -> COOKIES
+Workbench, Wheat -> Bread
+Workbench, Cane -> Sugar
+Workbench, Milk, Wheat, Egg, Sugar -> Cake
+Workbench, Golden Block, Apple -> Golden Apple
+Workbench, Pumpkin, Egg, Sugar -> Pumpkin Pie
+Workbench, Wheat -> Sheaf of Hay
+Workbench, Sheaf of Hay -> Wheat
+Workbench, Bamboo -> Paper
+Workbench, Bamboo, Thread -> Stage
+Workbench, Paper -> Book
+Workbench, Fire Rod -> Firepowder
+Workbench, Enderman Pearl, Firepowder -> Enderman Eye
+Workbench, Slime, Firepowder -> Lava Cream
+Workbench, Firepowder, Gunpowder, Coal -> Fireball
+Workbench, Feather, Dye, Book -> Editable Book
+Workbench, Gunpowder, Dye -> Star
+Workbench, Star, Paper, Gunpowder -> Rocket
+Workbench, Ink, Bone Meal -> Grey Dye
+Workbench, Lava Cream -> Magma Block
+Workbench, Glowstone Dust -> Glowstone
+Workbench, Glowstone -> Glowstone Dust
+Workbench, Board, Book -> Library
+Workbench, Board, Library -> Cathedral
+Workbench, Board, Diamond -> Music Box
+Furnace, Sand, Fire, Coal -> Glass
+Furnace, Sand, Fire, Wood -> Glass
+Furnace, Sand, Fire, Board -> Glass
+Furnace, Iron Ore, Fire, Coal -> Iron
+Furnace, Iron Ore, Fire, Wood -> Iron
+Furnace, Iron Ore, Fire, Board -> Iron
+Furnace, Golden Ore, Fire, Coal -> Gold
+Furnace, Golden Ore, Fire, Wood -> Gold
+Furnace, Golden Ore, Fire, Board -> Gold
+Furnace, Ancient Wreckage, Fire, Coal -> Netherite Scrap
+Furnace, Ancient Wreckage, Fire, Wood -> Netherite Scrap
+Furnace, Ancient Wreckage, Fire, Board -> Netherite Scrap
+Furnace, Clay, Fire, Coal -> Baked Clay
+Furnace, Clay, Fire, Wood -> Baked Clay
+Furnace, Clay, Fire, Board -> Baked Clay
+Furnace, Laminaria, Fire, Coal -> Dried Kelp
+Furnace, Laminaria, Fire, Wood -> Dried Kelp
+Furnace, Laminaria, Fire, Board -> Dried Kelp
+Blacksmith's Table, Netherite, Pickaxe -> Netherite Pickaxe
+Water, Fishing Rod -> Fish
