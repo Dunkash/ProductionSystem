@@ -89,10 +89,17 @@ namespace ProductionSystem
             }
             var sel = facts_box.CheckedItems.Cast<string>().ToHashSet();
             var res = Difference(selectedFacts.ToList(), sel.ToList());
+            text_box.Text += "--------------------------------------------------------------\n";
+            text_box.Text += "Полученные факты:\n";
+            factNum = 1;
             foreach (var fact in res)
             {
-                if(!d_facts_box.Items.Contains(fact))
+                if (!d_facts_box.Items.Contains(fact))
+                {
                     d_facts_box.Items.Add(fact);
+                    text_box.Text += $"{factNum}:  {fact}\n";
+                    factNum++;
+                }
             }
             label3.Visible = true;
             d_facts_box.Visible = true;
@@ -134,6 +141,18 @@ namespace ProductionSystem
                 }
                 step++;
             }
+            text_box.Text += "--------------------------------------------------------------\n";
+            text_box.Text += "Полученные факты:\n";
+            factNum = 1;
+            foreach (var fact in selectedFacts)
+            {
+                if (!d_facts_box.Items.Contains(fact))
+                {
+                    text_box.Text += $"{factNum}:  {fact}\n";
+                    factNum++;
+                }
+            }
+
         }
 
         private void clear_btn_Click(object sender, EventArgs e)
