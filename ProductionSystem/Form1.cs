@@ -67,8 +67,10 @@ namespace ProductionSystem
                 factNum++;
             }
             text_box.Text += '\n';
-            while (selectedFacts.Count != count)
+            bool check = true;
+            while (check)
             {
+                check = false;
                 count = selectedFacts.Count();
                 foreach (var rule in rules)
                 {
@@ -82,6 +84,7 @@ namespace ProductionSystem
                         text_box.Text += "--------------------------------------------------------------\n";
                         text_box.Text += $"Полученный факт: {rule.Action}\n";
                         rule.Evaluated = true;
+                        check = true;
                         break;
                     }
                 }
@@ -121,10 +124,10 @@ namespace ProductionSystem
                 factNum++;
             }
             text_box.Text += '\n';
-            var count = selectedFacts.Count + 1;
-            while (selectedFacts.Count != count)
+            bool check = true;
+            while (check)
             {
-                count = selectedFacts.Count();
+                check = false; 
                 foreach (var rule in rules)
                 {
                     if (!rule.Evaluated && selectedFacts.Contains(rule.Action))
@@ -136,6 +139,7 @@ namespace ProductionSystem
                         text_box.Text += $"Полученное правило: {rule}\n";
                         text_box.Text += "--------------------------------------------------------------\n";
                         rule.Evaluated = true;
+                        check = true;
                         break;
                     }
                 }
