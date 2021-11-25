@@ -17,16 +17,19 @@ namespace ProductionSystem
         public Form1()
         {
             InitializeComponent();
-           
+            var factsAndRules = Functions.Parse("../../database.txt");
+            facts = factsAndRules.Item1;
+            rules = factsAndRules.Item2;
             ReLoadData();
             fillFacts();
             text_box.Height = facts_box.Height;
         }
         private void ReLoadData()
         {
-            var factsAndRules = Functions.Parse("../../database.txt");
-            facts = factsAndRules.Item1;
-            rules = factsAndRules.Item2;
+            foreach(var rule in rules)
+            {
+                rule.Evaluated = false;
+            }
         }
         private void fillFacts()
         {
@@ -111,26 +114,25 @@ namespace ProductionSystem
                 factNum++;
             }
             text_box.Text += '\n';
-            bool check = false;
-            while (true)
+            var count = selectedFacts.Count + 1;
+            while (selectedFacts.Count != count)
             {
+                count = selectedFacts.Count();
                 foreach (var rule in rules)
                 {
                     if (!rule.Evaluated && selectedFacts.Contains(rule.Action))
                     {
+                        foreach (var condition in rule.Conditions)
+                            selectedFacts.Add(condition);
                         text_box.Text += $"\nШаг # {step}\n";
                         text_box.Text += "--------------------------------------------------------------\n";
                         text_box.Text += $"Полученное правило: {rule}\n";
                         text_box.Text += "--------------------------------------------------------------\n";
-
                         rule.Evaluated = true;
-                        check = true;
+                        break;
                     }
                 }
                 step++;
-                if (!check)
-                    break;
-                check = false;
             }
         }
 
@@ -138,6 +140,7 @@ namespace ProductionSystem
         {
             ReLoadData();
             facts_box.Items.Clear();
+            d_facts_box.Items.Clear();
             fillFacts();
             text_box.Text = "";
             d_facts_box.Text = "";
