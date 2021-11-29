@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace ProductionSystem
 {
-    static public class Functions
+    static public partial class Functions
     {
         //Парсер файла с фактами и правилами.
         //Все строки обрабатываются как факты, после сепаратора все строки обрабатываются как правила.
@@ -113,4 +113,6 @@ namespace ProductionSystem
             return res;
         }
     }
+
+
 }

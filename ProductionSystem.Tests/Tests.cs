@@ -309,21 +309,21 @@ namespace ProductionSystem.Library.Test
             Assert.IsTrue(facts.SetEquals(first_iter));
         }
 
+        [Test]
         public void BackwardComplex()
         {
-            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BacwardComplex.txt";
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BackwardComplex.txt";
 
             var result = Functions.Parse(file);
             var facts = result.Item1;
             var rules = result.Item2;
 
-            HashSet<string> first_iter = Functions.Backward(facts, rules);
+            HashSet<string> firstIter = Functions.Backward(facts, rules);
 
-            facts = Functions.Backward(facts, rules);
-            Assert.IsTrue(facts.SetEquals(new HashSet<string> { "a", "b", "c", "d", "e", "f" }));
+            Assert.IsTrue(firstIter.SetEquals(new HashSet<string> { "a", "b", "c", "d", "e", "f" }));
 
-            var lastIter = Functions.Backward(facts, rules);
-            Assert.IsTrue(facts.SetEquals(lastIter));
+            var lastIter = Functions.Backward(firstIter, rules);
+            Assert.IsTrue(firstIter.SetEquals(lastIter));
         }
     }
 
@@ -418,6 +418,23 @@ namespace ProductionSystem.Library.Test
 
             facts = Functions.Evaluate(facts, rules, false);
             Assert.IsTrue(facts.SetEquals(new HashSet<string> { "a", "b", "c", "d", "e", "f" }));
+        }
+    }
+
+    [TestFixture]
+    class BackwardEvaluationTest
+    {
+
+        [Test]
+        public void EvaluateObvious()
+        {
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BackwardObvious.txt";
+
+            var facts = Functions.Parse(file).Item1;
+
+            ProductionSystem.Node res = Functions.Prove("second", facts, new HashSet<Rule> { });
+            Assert.AreEqual(res.Rule, new Rule(new HashSet<string> { "second" }, "second"));
+            Assert.AreEqual(res.Proves, null);
         }
     }
 }
