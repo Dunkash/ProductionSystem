@@ -113,7 +113,6 @@ namespace ProductionSystem.Library.Test
             var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_Lorem.txt";
 
             var result = Functions.Parse(file);
-            var facts = result.Item1;
             var rules = result.Item2;
 
             Assert.AreEqual(rules.Count, 0);
@@ -424,7 +423,6 @@ namespace ProductionSystem.Library.Test
     [TestFixture]
     class BackwardEvaluationTest
     {
-
         [Test]
         public void EvaluateObvious()
         {
@@ -435,6 +433,29 @@ namespace ProductionSystem.Library.Test
             ProductionSystem.Node res = Functions.Prove("second", facts, new HashSet<Rule> { });
             Assert.AreEqual(res.Rule, new Rule(new HashSet<string> { "second" }, "second"));
             Assert.AreEqual(res.Proves, null);
+        }
+
+        [Test]
+        public void EvaluateImpossible()
+        {
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BackwardImpossible.txt";
+            var facts = Functions.Parse(file).Item1;
+
+            Node res = Functions.Prove("second", facts, new HashSet<Rule> { });
+            Assert.AreEqual(res, null);
+        }
+
+        [Test]
+        public void EvaluateSimple()
+        {
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BackwardSimple.txt";
+            var facts = Functions.Parse(file).Item1;
+            var rules = Functions.Parse(file).Item2;
+
+            Node res = Functions.Prove("third", facts, rules);
+            Assert.AreEqual(res.Rule,new Rule(new HashSet<string> {"second"},"third"));
+            Assert.AreEqual(res.Proves[0], new Rule(new HashSet<string> { "first" }, "second"));
+            Assert.AreEqual(res.Proves[0].Proves[0], new Rule(new HashSet<string> { "first" }, "first"));
         }
     }
 }

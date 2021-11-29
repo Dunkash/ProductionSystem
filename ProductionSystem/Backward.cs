@@ -8,6 +8,8 @@ namespace ProductionSystem
 {
     public static partial class Functions
     {
+        public static Node unsolvable = new Node("unsolvable");
+
         public static Node Prove(string prove, HashSet<string> facts, HashSet<Rule> rules)
         {
             Node solution = null;
@@ -24,11 +26,46 @@ namespace ProductionSystem
                         solution = new Node(currBranch.prove);
                         continue;
                     }
-                    
+                    var possibleRules = rules.Where(x => x.Action == currBranch.prove).ToList();
+                    if (possibleRules.Count==0)
+                    {
+                        solution = unsolvable;
+                        continue;
+                    }
+                    else
+                    {
+                        branches.Push(new Branch(currBranch.prove, 1));
+                        continue;
+                    }
                 }
-                else
+                else if (currBranch.stage==1)
                 {
+                    if (solution==unsolvable)
+                    {
+                        solution = null;
+                        branches.Push(new Branch(currBranch.prove, 1, currBranch.nodeNum + 1, 0));
+                        continue;
+                    }
+                    if (solution!=null && !currBranch.buffer.Contains(solution))
+                        currBranch.buffer.Add(solution);
+                    var possibleRules = rules.Where(x => x.Action == currBranch.prove).ToList();
+                    if (possibleRules.Count <= currBranch.nodeNum)
+                    {
 
+                        continue;
+                    }
+                    else if (possibleRules[currBranch.nodeNum].Conditions.Count == currBranch.factNum)
+                    {
+                        if (currBranch.buffer.Count != 0)
+                            solution = new Node(new Rule(new HashSet<string> { currBranch.prove }, currBranch.prove), currBranch.buffer);
+                        continue;
+                    }
+                    else
+                    {
+                        branches.Push(new Branch(currBranch.prove,currBranch.buffer, 1, currBranch.nodeNum, currBranch.factNum + 1));
+                        branches.Push(new Branch(possibleRules[currBranch.nodeNum].Conditions.ToList()[currBranch.factNum],currBranch.buffer, 0));
+                        continue;
+                    }
                 }
             }
 
@@ -59,9 +96,11 @@ namespace ProductionSystem
 
         public Node(string fact)
         {
-            this.rule = new Rule(new HashSet<string> { fact }, fact);
+            rule = new Rule(new HashSet<string> { fact }, fact);
         }
     }
+
+
 
     public class Branch
     {
