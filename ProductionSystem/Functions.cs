@@ -78,6 +78,7 @@ namespace ProductionSystem
 
         //Один цикл обратной обработки по набору правил и фактов.
         //Возвращает новый набор правил (включая уже имевшиеся)
+        [Obsolete("Этот метод не выполняет обратный поиск так как нужно, вместо этого он находит все начальные правила, с помощью которых можно получить нужное")]
         public static HashSet<string> Backward(HashSet<string> facts, HashSet<Rule> rules)
         {
             var res = facts.ToHashSet();
@@ -96,7 +97,7 @@ namespace ProductionSystem
         //Полная обработка набора правил и фактов
         //Флаг forward определяет вид обработки (true - прямая, false - обратная)
         //Возвращает новый набор правил (включая уже имевшиеся)
-        public static HashSet<string> Evaluate(HashSet<string> facts, HashSet<Rule> rules, bool forward)
+        public static HashSet<string> Evaluate(HashSet<string> facts, HashSet<Rule> rules, bool forward=true)
         {
             var res = facts.ToHashSet();
             var count = res.Count() + 1;
@@ -106,8 +107,8 @@ namespace ProductionSystem
                 count = res.Count();
                 if (forward)
                     res = Forward(res, rules);
-                else
-                    res = Backward(res, rules);
+                //else
+                    //res = Backward(res, rules);
                 
             }
             return res;

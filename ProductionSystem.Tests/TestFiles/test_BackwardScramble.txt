@@ -1,0 +1,46 @@
+
+
+
+***
+
+a -> aa
+a,b -> ab
+a,b -> ba
+a,c -> ac
+a,c -> ca
+a,d -> da
+a,d -> ad
+a,e -> ae
+a,e -> ea
+b -> bb
+b,c -> bc
+b,c -> cb
+b,d -> bd
+b,d -> db
+b,e -> be
+b,e -> eb
+c -> cc
+c,d -> cd
+c,d -> dc
+c,e -> ce
+c,e -> ec
+d -> dd
+d,e -> de
+d,e -> ed
+e -> ee
+
+ac,ed -> aced
+ac,e -> ace
+a,ce -> ace
+ba,d -> bad
+b,ad -> bad
+ba,de -> bade
+be,ed ->bead
+b,ed ->bed
+be,d ->bed
+ca,b -> cab
+c,ab -> cab
+c,ad -> cad
+ca,d -> cad
+da,b -> dab
+d,ab -> dab

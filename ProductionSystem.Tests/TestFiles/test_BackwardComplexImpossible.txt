@@ -5,6 +5,5 @@ B
 
 D, E -> F
 A, C -> E
-B, C -> D
 A, B -> C
 

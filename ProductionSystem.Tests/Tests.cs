@@ -217,7 +217,10 @@ namespace ProductionSystem.Library.Test
         }
     }
 
-    [TestFixture]
+//  Эти тесты проверяют неверную имплементацию обратного поиска, и абсолютно не нужны.
+
+    /*
+  [TestFixture]
     class BackwardTest
     {
         [Test]
@@ -325,7 +328,7 @@ namespace ProductionSystem.Library.Test
             Assert.IsTrue(firstIter.SetEquals(lastIter));
         }
     }
-
+    */
     [TestFixture]
     class EvaluateTest
     {
@@ -376,6 +379,7 @@ namespace ProductionSystem.Library.Test
             Assert.IsTrue(facts.SetEquals(lastIter));
         }
 
+        /*
         [Test]
         public void BackwardEvaluateNoFacts()
         {
@@ -418,6 +422,7 @@ namespace ProductionSystem.Library.Test
             facts = Functions.Evaluate(facts, rules, false);
             Assert.IsTrue(facts.SetEquals(new HashSet<string> { "a", "b", "c", "d", "e", "f" }));
         }
+        */
     }
 
     [TestFixture]
@@ -457,5 +462,59 @@ namespace ProductionSystem.Library.Test
             Assert.AreEqual(res.Proves[0].Rule, new Rule(new HashSet<string> { "first" }, "second"));
             Assert.AreEqual(res.Proves[0].Proves[0].Rule, new Rule(new HashSet<string> { "first" }, "first"));
         }
+
+        [Test]
+        public void EvaluateComplex()
+        {
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BackwardComplex.txt";
+            var facts = Functions.Parse(file).Item1;
+            var rules = Functions.Parse(file).Item2;
+
+            Node res = Functions.Prove("f", facts, rules);
+            Assert.AreEqual(res.Rule, new Rule(new HashSet<string> { "d", "e" }, "f"));
+            Assert.AreEqual(res.Proves.Count, 2);
+        }
+
+        [Test]
+        public void EvaluateComplexImpossible()
+        {
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BackwardComplexImpossible.txt";
+            var facts = Functions.Parse(file).Item1;
+            var rules = Functions.Parse(file).Item2;
+
+            Node res = Functions.Prove("f", facts, rules);
+            Assert.AreEqual(res, null);
+        }
+
+        [Test]
+        public void EvaluateScrable()
+        {
+            var file = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName + "//TestFiles//" + "test_BackwardScramble.txt";
+            var facts = new HashSet<string> { "a", "b", "c" };
+            var rules = Functions.Parse(file).Item2;
+
+            Node res = Functions.Prove("cab", facts, rules);
+            Assert.IsTrue(res.Rule.Action == "cab");
+
+            res = Functions.Prove("bed", facts, rules);
+            Assert.AreEqual(res, null);
+
+            facts = new HashSet<string> { "b","e","d" };
+
+            res = Functions.Prove("bed", facts, rules);
+            Assert.IsTrue(res.Rule.Action == "bed");
+
+            res = Functions.Prove("cab", facts, rules);
+            Assert.AreEqual(res, null);
+
+            facts = new HashSet<string> { "a", "c", "e","d" };
+            res = Functions.Prove("aced",facts,rules);
+            Assert.IsTrue(res.Rule.Action == "aced");
+
+            res = Functions.Prove("bade", facts, rules);
+            Assert.AreEqual(res, null);
+        }
+
+
     }
 }
