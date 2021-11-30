@@ -51,13 +51,12 @@ namespace ProductionSystem
                     var possibleRules = rules.Where(x => x.Action == currBranch.prove).ToList();
                     if (possibleRules.Count <= currBranch.nodeNum)
                     {
-
                         continue;
                     }
                     else if (possibleRules[currBranch.nodeNum].Conditions.Count == currBranch.factNum)
                     {
                         if (currBranch.buffer.Count != 0)
-                            solution = new Node(new Rule(new HashSet<string> { currBranch.prove }, currBranch.prove), currBranch.buffer);
+                            solution = new Node(currBranch.prove, currBranch.buffer);
                         continue;
                     }
                     else
@@ -68,7 +67,8 @@ namespace ProductionSystem
                     }
                 }
             }
-
+            if (solution == unsolvable)
+                solution = null;
             return solution;
         }
     }
@@ -93,6 +93,14 @@ namespace ProductionSystem
             this.rule = rule;
             this.proves = proves;
         }
+
+        public Node(string fact,List<Node> proves)
+        {
+            var prereqs = proves.ConvertAll(x => x.rule.Action);
+            rule = new Rule(new HashSet<string>(prereqs), fact);
+            this.proves = proves;
+        }
+
 
         public Node(string fact)
         {

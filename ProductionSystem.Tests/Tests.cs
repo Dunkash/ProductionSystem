@@ -454,8 +454,8 @@ namespace ProductionSystem.Library.Test
 
             Node res = Functions.Prove("third", facts, rules);
             Assert.AreEqual(res.Rule,new Rule(new HashSet<string> {"second"},"third"));
-            Assert.AreEqual(res.Proves[0], new Rule(new HashSet<string> { "first" }, "second"));
-            Assert.AreEqual(res.Proves[0].Proves[0], new Rule(new HashSet<string> { "first" }, "first"));
+            Assert.AreEqual(res.Proves[0].Rule, new Rule(new HashSet<string> { "first" }, "second"));
+            Assert.AreEqual(res.Proves[0].Proves[0].Rule, new Rule(new HashSet<string> { "first" }, "first"));
         }
     }
 }
