@@ -114,7 +114,6 @@ namespace ProductionSystem
             ReLoadData();
             text_box.Text = "";
             var selectedFacts = d_facts_box.CheckedItems.Cast<string>().ToHashSet();
-            int step = 1;
             text_box.Text += "Обратный поиск\n";
             text_box.Text += "Выбранные факты:\n";
             int factNum = 1;
@@ -124,37 +123,17 @@ namespace ProductionSystem
                 factNum++;
             }
             text_box.Text += '\n';
-            bool check = true;
-            while (check)
-            {
-                check = false; 
-                foreach (var rule in rules)
-                {
-                    if (!rule.Evaluated && selectedFacts.Contains(rule.Action))
-                    {
-                        foreach (var condition in rule.Conditions)
-                            selectedFacts.Add(condition);
-                        text_box.Text += $"\nШаг # {step}\n";
-                        text_box.Text += "--------------------------------------------------------------\n";
-                        text_box.Text += $"Полученное правило: {rule}\n";
-                        text_box.Text += "--------------------------------------------------------------\n";
-                        rule.Evaluated = true;
-                        check = true;
-                        break;
-                    }
-                }
-                step++;
-            }
+            var solution = Functions.Prove(selectedFacts.First(), facts, rules);
+            text_box.Text += $"\nШаг # {1}\n";
             text_box.Text += "--------------------------------------------------------------\n";
-            text_box.Text += "Полученные факты:\n";
-            factNum = 1;
-            foreach (var fact in selectedFacts)
+            text_box.Text += $"Полученное правило: {solution.Rule}\n";
+            text_box.Text += "--------------------------------------------------------------\n";
+            for (int i = 0; i + 1 < solution.Proves.Count; i++)
             {
-                if (!d_facts_box.Items.Contains(fact))
-                {
-                    text_box.Text += $"{factNum}:  {fact}\n";
-                    factNum++;
-                }
+                text_box.Text += $"\nШаг # {i+2}\n";
+                text_box.Text += "--------------------------------------------------------------\n";
+                text_box.Text += $"Полученное правило: {solution.Proves[i]}\n";
+                text_box.Text += "--------------------------------------------------------------\n";
             }
 
         }
@@ -170,6 +149,11 @@ namespace ProductionSystem
             label3.Visible = false;
             d_facts_box.Visible = false;
             backword_btn.Visible = false;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
