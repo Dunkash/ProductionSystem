@@ -41,7 +41,7 @@ namespace ProductionSystem
                     }
                     else
                     {
-                        branches.Push(new Branch(currBranch.prove, 1));
+                        branches.Push(new Branch(currBranch.prove,new List<Node>(),currBranch.proofPath, 1));
                         continue;
                     }
                 }
@@ -49,6 +49,12 @@ namespace ProductionSystem
                 else if (currBranch.stage==1)
                 {
                     var possibleRules = rules.Where(x => x.Action == currBranch.prove).ToList();
+                    //Защита от зацикливания. Да, она говно. Нет, она работает.
+                    if (currBranch.proofPath.Contains(currBranch.prove))
+                    {
+                        solution = unsolvable;
+                        continue;
+                    }
                     if (possibleRules.Count <= currBranch.nodeNum)
                     {
                         continue;
@@ -75,8 +81,10 @@ namespace ProductionSystem
                     }
                     else
                     {
-                        branches.Push(new Branch(currBranch.prove,currBranch.buffer, 1, currBranch.nodeNum, currBranch.factNum + 1));
-                        branches.Push(new Branch(possibleRules[currBranch.nodeNum].Conditions.ToList()[currBranch.factNum],currBranch.buffer, 0));
+                        var t = currBranch.proofPath.ToList();
+                        t.Add(currBranch.prove);
+                        branches.Push(new Branch(currBranch.prove,currBranch.buffer,currBranch.proofPath, 1, currBranch.nodeNum, currBranch.factNum + 1));
+                        branches.Push(new Branch(possibleRules[currBranch.nodeNum].Conditions.ToList()[currBranch.factNum],currBranch.buffer, t, 0));
                         continue;
                     }
                 }
@@ -160,6 +168,17 @@ namespace ProductionSystem
         public int factNum { get; set; }
         public List<Node> buffer { get; set; }
 
+        public List<string> proofPath { get; set; }
+
+        public Branch(string prove, List<Node> nodes,List<string> proofPath, int stage = 0, int nodeNum = 0, int factNum = 0)
+        {
+            this.prove = prove;
+            buffer = nodes;
+            this.stage = stage;
+            this.nodeNum = nodeNum;
+            this.factNum = factNum;
+            this.proofPath = proofPath;
+        }
         public Branch(string prove, List<Node> nodes, int stage = 0, int nodeNum = 0, int factNum=0)
         {
             this.prove = prove;
@@ -167,6 +186,7 @@ namespace ProductionSystem
             this.stage = stage;
             this.nodeNum = nodeNum;
             this.factNum = factNum;
+            proofPath = new List<string>();
         }
 
         public Branch(string prove, int stage = 0, int nodeNum = 0, int factNum = 0)
@@ -176,6 +196,7 @@ namespace ProductionSystem
             this.stage = stage;
             this.nodeNum = nodeNum;
             this.factNum = factNum;
+            proofPath = new List<string>();
         }
     }
 }
