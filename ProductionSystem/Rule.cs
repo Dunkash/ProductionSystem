@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -61,11 +61,11 @@ namespace ProductionSystem
             {
                 res += i;
                 if (i != Conditions.Last())
-                    res += ", ";
+                    res += ",";
             }
-            
-            res += " ­-> " + Action;
-            return res;
+
+			res += " -> " + Action;
+			return res;
         }
 
         // override object.Equals
