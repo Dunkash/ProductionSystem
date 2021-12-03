@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -109,12 +109,36 @@ namespace ProductionSystem
             backword_btn.Visible = true;
         }
 
+
+		private void getPath(Node solution, HashSet<string> evlRules)
+		{
+			if (solution != null && solution.Proves != null)
+			{
+				if(!evlRules.Contains(solution.Rule.ToString()))
+					evlRules.Add(solution.Rule.ToString());
+				foreach (var prove in solution.Proves)
+				{
+
+					if (!evlRules.Contains(prove.ToString()) && prove.Proves != null)
+					{
+						evlRules.Add(prove.ToString());
+
+					}
+				}
+				foreach (var p in solution.Proves)
+					getPath(p, evlRules);
+			}
+			
+		}
+
+
         private void backword_btn_Click(object sender, EventArgs e)
         {
             ReLoadData();
             text_box.Text = "";
             var selectedFacts = d_facts_box.CheckedItems.Cast<string>().ToHashSet();
-            text_box.Text += "Обратный поиск\n";
+			var selFacts = facts_box.CheckedItems.Cast<string>().ToHashSet();
+			text_box.Text += "Обратный поиск\n";
             text_box.Text += "Выбранные факты:\n";
             int factNum = 1;
             foreach (var fact in selectedFacts)
@@ -123,19 +147,26 @@ namespace ProductionSystem
                 factNum++;
             }
             text_box.Text += '\n';
-            var solution = Functions.Prove(selectedFacts.First(), facts, rules);
-            text_box.Text += $"\nШаг # {1}\n";
-            text_box.Text += "--------------------------------------------------------------\n";
-            text_box.Text += $"Полученное правило: {solution.Rule}\n";
-            text_box.Text += "--------------------------------------------------------------\n";
-            for (int i = 0; i + 1 < solution.Proves.Count; i++)
-            {
-                text_box.Text += $"\nШаг # {i+2}\n";
-                text_box.Text += "--------------------------------------------------------------\n";
-                text_box.Text += $"Полученное правило: {solution.Proves[i]}\n";
-                text_box.Text += "--------------------------------------------------------------\n";
-            }
-
+            var solution = Functions.Prove(selectedFacts.First(), selFacts, rules);
+			if (solution == null)
+			{
+				text_box.Text += "--------------------------------------------------------------\n";
+				text_box.Text += "Правило невыводимо\n";
+				text_box.Text += "--------------------------------------------------------------\n";
+				
+			}
+			else {
+				HashSet<string> evlRules = new HashSet<string>();
+				getPath(solution, evlRules);
+				var rul = evlRules.ToList();
+				for (int i = 0; i < rul.Count; i++)
+				{
+					text_box.Text += $"\nШаг # {i+1}\n";
+					text_box.Text += "--------------------------------------------------------------\n";
+					text_box.Text += $"Полученное правило: {rul[i]}\n";
+					text_box.Text += "--------------------------------------------------------------\n";
+				}
+			}
         }
 
         private void clear_btn_Click(object sender, EventArgs e)
